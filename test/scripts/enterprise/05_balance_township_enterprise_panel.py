@@ -11,8 +11,8 @@
 默认输出：`test/township_enterprise_panel_balanced_2012_2021.csv`
 
 用法：
-  python balance_township_enterprise_panel.py
-  python balance_township_enterprise_panel.py --year-min 2000 --year-max 2024 -o out.csv
+  python 05_balance_township_enterprise_panel.py
+  python 05_balance_township_enterprise_panel.py --year-min 2000 --year-max 2024 -o out.csv
 """
 
 from __future__ import annotations
@@ -88,7 +88,7 @@ def main() -> None:
     out = skel.merge(sparse, on=["年份", "code"], how="left")
     out["n"] = out["n"].fillna(0).astype("int64")
 
-    # 列顺序与 merge_division_to_enterprise_counts 一致
+    # 列顺序与 04_merge_division_to_enterprise_counts 一致
     preferred_qu = [
         "区县_地名",
         "区县_区划码",

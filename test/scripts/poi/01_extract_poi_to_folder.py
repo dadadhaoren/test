@@ -10,10 +10,10 @@
 - 可传 `--winrar "C:\\Program Files\\WinRAR\\WinRAR.exe"` 或环境变量 **WINRAR**
 
 用法（在项目 test 目录外也可用绝对路径运行）：
-  python extract_poi_to_folder.py
-  python extract_poi_to_folder.py --years 2013,2020
-  python extract_poi_to_folder.py --seven-zip "C:\\Program Files\\7-Zip\\7z.exe"
-  python extract_poi_to_folder.py --winrar "C:\\Program Files\\WinRAR\\WinRAR.exe" --years 2012,2015
+  python 01_extract_poi_to_folder.py
+  python 01_extract_poi_to_folder.py --years 2013,2020
+  python 01_extract_poi_to_folder.py --seven-zip "C:\\Program Files\\7-Zip\\7z.exe"
+  python 01_extract_poi_to_folder.py --winrar "C:\\Program Files\\WinRAR\\WinRAR.exe" --years 2012,2015
 """
 
 from __future__ import annotations
@@ -30,7 +30,7 @@ import zipfile
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
-# 与 parse_prefecture_poi 一致
+# 与 02_parse_prefecture_poi 一致
 def find_poi_root(explicit: Optional[str]) -> str:
     if explicit:
         p = os.path.abspath(explicit)

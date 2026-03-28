@@ -10,9 +10,9 @@
 Name、code 以乡镇矢量为准（与 POI 汇总按 code 对齐）。
 
 用法：
-  python township_poi_panel_wide.py
-  python township_poi_panel_wide.py --output "D:\\out\\township_poi_2012_2017.csv"
-  python township_poi_panel_wide.py --years 2013,2014 --chunk-size 150000
+  python 03_township_poi_panel_wide.py
+  python 03_township_poi_panel_wide.py --output "D:\\out\\township_poi_2012_2017.csv"
+  python 03_township_poi_panel_wide.py --years 2013,2014 --chunk-size 150000
 """
 
 from __future__ import annotations

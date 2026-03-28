@@ -8,8 +8,8 @@
 默认输出：`test/township_enterprise_counts_by_year_with_division.csv`
 
 用法：
-  python merge_division_to_enterprise_counts.py
-  python merge_division_to_enterprise_counts.py -i counts.csv -d division.csv -o out.csv
+  python 04_merge_division_to_enterprise_counts.py
+  python 04_merge_division_to_enterprise_counts.py -i counts.csv -d division.csv -o out.csv
 """
 
 from __future__ import annotations

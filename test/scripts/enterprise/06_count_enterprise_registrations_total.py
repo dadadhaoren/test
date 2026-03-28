@@ -4,15 +4,15 @@
 默认：**活动工作表**（与 Excel 打开时选中的表一致，对应 workbookView activeTab），
 首行视为表头，**数据行 = 总行数 − 1**）。
 
-与 `extract_enterprises_to_township.py` 目录结构一致：根目录下各省子文件夹，内为 `*.xlsx`。
+与 `02_extract_enterprises_to_township.py` 目录结构一致：根目录下各省子文件夹，内为 `*.xlsx`。
 
 **性能**：优先用 zip + 工作表 XML 中 `<row` 计数（不解析单元格），比 openpyxl 逐行迭代快一个数量级以上；
 解析失败时回退到 openpyxl（需安装 openpyxl）。
 
 用法：
-  python count_enterprise_registrations_total.py
-  python count_enterprise_registrations_total.py --root "F:\\...\\全国所有企业工商信息"
-  python count_enterprise_registrations_total.py --all-sheets
+  python 06_count_enterprise_registrations_total.py
+  python 06_count_enterprise_registrations_total.py --root "F:\\...\\全国所有企业工商信息"
+  python 06_count_enterprise_registrations_total.py --all-sheets
 """
 
 from __future__ import annotations

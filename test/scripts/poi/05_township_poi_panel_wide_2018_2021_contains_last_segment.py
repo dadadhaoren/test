@@ -13,8 +13,8 @@
 输出平衡面板（乡镇×年，无匹配则三列 0），默认 CSV utf-8-sig。
 
 用法：
-  python township_poi_panel_wide_2018_2021_contains_last_segment.py
-  python township_poi_panel_wide_2018_2021_contains_last_segment.py --years 2018,2019 --max-files 3
+  python 05_township_poi_panel_wide_2018_2021_contains_last_segment.py
+  python 05_township_poi_panel_wide_2018_2021_contains_last_segment.py --years 2018,2019 --max-files 3
 """
 
 from __future__ import annotations

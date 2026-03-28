@@ -10,8 +10,8 @@
 区县表按 code 去重后左连接；未匹配行区县列为空。
 
 用法：
-  python merge_county_attrs_to_township_panel.py
-  python merge_county_attrs_to_township_panel.py -o out.csv
+  python 06_merge_county_attrs_to_township_panel.py
+  python 06_merge_county_attrs_to_township_panel.py -o out.csv
 """
 
 from __future__ import annotations

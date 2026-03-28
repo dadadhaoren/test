@@ -19,11 +19,11 @@
 2. **公司名称关键词**（可选）：`--no-exclude-name-keywords` 可关。
 
 用法：
-  python extract_enterprises_to_township.py --max-files 2
-  python extract_enterprises_to_township.py --provinces 上海,北京
-  python extract_enterprises_to_township.py --year-min 2012 --year-max 2021
+  python 02_extract_enterprises_to_township.py --max-files 2
+  python 02_extract_enterprises_to_township.py --provinces 上海,北京
+  python 02_extract_enterprises_to_township.py --year-min 2012 --year-max 2021
 
-全国按省并行（合并各省输出）见：`run_extract_enterprises_parallel.py`。
+全国按省并行（合并各省输出）见：`03_run_extract_enterprises_parallel.py`。
 """
 
 from __future__ import annotations

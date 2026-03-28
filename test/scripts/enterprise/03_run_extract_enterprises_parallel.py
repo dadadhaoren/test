@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 """
-按**省文件夹**并行调用 `extract_enterprises_to_township.py`（每省独立子进程），
+按**省文件夹**并行调用 `02_extract_enterprises_to_township.py`（每省独立子进程），
 最后合并为**全国** `年份×乡镇 code` 计数表与汇总统计 JSON。
 
-前提：`extract_enterprises_to_township.py` 已支持 `--enterprise-root` 指向**单省目录**
+前提：`02_extract_enterprises_to_township.py` 已支持 `--enterprise-root` 指向**单省目录**
 （其下直接为 `*.xlsx`）。
 
 默认：`--workers` = min(10, CPU 逻辑核数)（高并发；仍受磁盘与内存约束，可再调大）。
 
 用法：
-  python run_extract_enterprises_parallel.py --dry-run
-  python run_extract_enterprises_parallel.py --workers 12
-  python run_extract_enterprises_parallel.py --only-subdirs 上海所有企业-新版,宁夏所有企业
+  python 03_run_extract_enterprises_parallel.py --dry-run
+  python 03_run_extract_enterprises_parallel.py --workers 12
+  python 03_run_extract_enterprises_parallel.py --only-subdirs 上海所有企业-新版,宁夏所有企业
 """
 
 from __future__ import annotations
@@ -30,7 +30,7 @@ from typing import Any, Dict, List, Optional, Tuple
 import pandas as pd
 
 SCRIPT_DIR = Path(__file__).resolve().parent
-EXTRACT_SCRIPT = SCRIPT_DIR / "extract_enterprises_to_township.py"
+EXTRACT_SCRIPT = SCRIPT_DIR / "02_extract_enterprises_to_township.py"
 
 
 def safe_stem(name: str, max_len: int = 100) -> str:
@@ -176,7 +176,7 @@ def main() -> None:
     default_merged_stats = test_dir / "township_enterprise_extract_stats.json"
 
     ap = argparse.ArgumentParser(
-        description="按省并行跑 extract_enterprises_to_township 并合并全国计数",
+        description="按省并行跑 02_extract_enterprises_to_township 并合并全国计数",
     )
     ap.add_argument("--national-root", default=default_national, help="全国企业工商根目录（含各省子文件夹）")
     ap.add_argument(

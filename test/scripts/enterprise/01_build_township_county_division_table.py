@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 由「乡镇边界」+「2023 年初区县矢量」整合为**仅区划属性**的乡镇级表（无 POI），
-区县字段命名与 `merge_county_attrs_to_township_panel.py` / `township_poi_panel_*_wide.csv` 一致（`区县_*`）。
+区县字段命名与 `poi/06_merge_county_attrs_to_township_panel.py` / `township_poi_panel_*_wide.csv` 一致（`区县_*`）。
 
 匹配规则：乡镇 `code` 字符串取前 6 位 → 与区县 shapefile 的县级 `code` 相等；区县按 `code` 去重。
 
@@ -12,8 +12,8 @@
 输出默认：test/township_county_division_2023.csv（utf-8-sig，不含 geometry）
 
 用法：
-  python build_township_county_division_table.py
-  python build_township_county_division_table.py -o out.csv
+  python 01_build_township_county_division_table.py
+  python 01_build_township_county_division_table.py -o out.csv
 """
 
 from __future__ import annotations

@@ -9,6 +9,9 @@
 
 需人工解压或安装 7-Zip/UnRAR 后处理的格式（脚本会写入 manifest 提示）：
 - 分卷 7z（2015–2017 等）、整包 rar（2012、2014、2018–2022 等）
+
+用法：
+  python 02_parse_prefecture_poi.py
 """
 
 from __future__ import annotations

@@ -2,7 +2,7 @@
 """
 乡镇级 POI 面板（宽表）— CATEGORY 或 SUBTYPE 与「小类」任一相等即纳入。
 
-在 township_poi_panel_wide.py 基础上扩展：
+在 `03_township_poi_panel_wide.py` 基础上扩展：
   - 原逻辑：仅 CATEGORY 与《公共产品供给分类标准》「小类」直接相等匹配；
   - 本脚本：CATEGORY **或** SUBTYPE 与「小类」相等（二者满足其一即可），均映射到同一套一级类别。
   - 若同一记录上 CATEGORY、SUBTYPE 均落在小类集合内，优先按 **CATEGORY** 归入一级类别（只计 1 个点）。
@@ -12,8 +12,8 @@
 默认输出文件名与仅 CATEGORY 版本区分，避免覆盖。
 
 用法：
-  python township_poi_panel_wide_cat_or_subtype.py
-  python township_poi_panel_wide_cat_or_subtype.py -o "D:\\out\\panel.csv"
+  python 04_township_poi_panel_wide_cat_or_subtype.py
+  python 04_township_poi_panel_wide_cat_or_subtype.py -o "D:\\out\\panel.csv"
 """
 
 from __future__ import annotations

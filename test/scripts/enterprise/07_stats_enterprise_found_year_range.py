@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 统计全国企业工商 xlsx 中「成立日期」解析出的年份范围（最早 / 最晚），
-与 `extract_enterprises_to_township.py` 口径一致：
+与 `02_extract_enterprises_to_township.py` 口径一致：
 
 - **首张工作表**
 - 日期列优先 **成立日期**，若无则 **注册日期**
@@ -13,13 +13,14 @@
 - 可选 **--workers N**：多进程并行处理多个 xlsx（受磁盘带宽限制，默认 4）。
 
 用法：
-  python stats_enterprise_found_year_range.py
-  python stats_enterprise_found_year_range.py --workers 8
+  python 07_stats_enterprise_found_year_range.py
+  python 07_stats_enterprise_found_year_range.py --workers 8
 """
 
 from __future__ import annotations
 
 import argparse
+import importlib
 import os
 import sys
 from concurrent.futures import ProcessPoolExecutor, as_completed
@@ -35,7 +36,10 @@ _SCRIPT_DIR = Path(__file__).resolve().parent
 if str(_SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(_SCRIPT_DIR))
 
-from extract_enterprises_to_township import iter_enterprise_xlsx, parse_found_year  # noqa: E402
+# 文件名以数字开头，不能用 `from 02_... import`，故用 importlib
+_et = importlib.import_module("02_extract_enterprises_to_township")
+iter_enterprise_xlsx = _et.iter_enterprise_xlsx
+parse_found_year = _et.parse_found_year
 
 
 def _pick_date_col_index(header: tuple) -> int | None:
@@ -183,7 +187,7 @@ def main() -> None:
                     print(f"  进度 {done}/{n_files} …", flush=True)
 
     print("---", flush=True)
-    print("口径：首张工作表；日期列=成立日期（无则注册日期）；年份解析同 extract_enterprises_to_township", flush=True)
+    print("口径：首张工作表；日期列=成立日期（无则注册日期）；年份解析同 02_extract_enterprises_to_township", flush=True)
     if global_min is not None and global_max is not None:
         print(f"全部有效年份范围: {global_min} — {global_max}", flush=True)
     else:

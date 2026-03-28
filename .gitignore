@@ -13,6 +13,7 @@ test/rep/
 
 # 编辑器与临时文件
 __pycache__/
+**/__pycache__/
 *.py[cod]
 .vscode/
 .idea/
