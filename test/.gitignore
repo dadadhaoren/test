@@ -1,0 +1,13 @@
+# 数据与中间产物（仓库仅保留脚本与说明文档，不提交数据）
+*.dta
+*.parquet
+*.csv
+*.xlsx
+*.json
+output/
+enterprise_parallel_partial/
+rep/
+*.log
+*.err
+~$*
+*.stswp
