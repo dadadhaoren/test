@@ -16,19 +16,21 @@
 | 地级市 POI 主目录 | `F:\BaiduNetdiskDownload\地级市POI兴趣点` |
 | **解压后的 POI 数据（新建）** | `F:\BaiduNetdiskDownload\地级市POI兴趣点\poi_extracted` |
 
-将 **rar / 分卷 7z** 等解压出的 csv、shp、xlsx 等，建议按年份建子目录放入上表最后一格，例如 `...\poi_extracted\2015\`，便于与脚本 `parse_prefecture_poi.py` 后续衔接。
+将 **rar / 分卷 7z** 等解压出的 csv、shp、xlsx 等，建议按年份建子目录放入上表最后一格，例如 `...\poi_extracted\2015\`，便于与脚本 `02_parse_prefecture_poi.py` 后续衔接。
 
 ### 脚本目录（归档）
 
 脚本已按主题归入 **`scripts/enterprise/`**（工商与区划）与 **`scripts/poi/`**（POI 与乡镇面板），索引与运行说明见 **[scripts/README.md](./scripts/README.md)**。
 
+**1223 分片 CSV（网盘「1223工商企业信息」）** 另有一套独立脚本，放在 **`anther_data_enterprise/`**（与全国工商 xlsx 流水线并行，默认成立年 2000–2022）：统计行数、按 `part_*.csv` 提取与并行合并、并入县级以上区划地名。说明与口径见 **[anther_data_enterprise/README.md](./anther_data_enterprise/README.md)**（含与 xlsx 在**国民行业分类字段**、**公司名剔除词表**上的差异）。
+
 ### POI 压缩包按年解压（脚本）
 
-使用 **[scripts/poi/extract_poi_to_folder.py](./scripts/poi/extract_poi_to_folder.py)**，将各 `YYYYPOI` 下的压缩包解压到 `poi_extracted\YYYY\`（2020 为「一市一子文件夹」，2023 为「一省一子文件夹」）。
+使用 **[scripts/poi/01_extract_poi_to_folder.py](./scripts/poi/01_extract_poi_to_folder.py)**，将各 `YYYYPOI` 下的压缩包解压到 `poi_extracted\YYYY\`（2020 为「一市一子文件夹」，2023 为「一省一子文件夹」）。
 
 ```text
-python test/scripts/poi/extract_poi_to_folder.py
-python test/scripts/poi/extract_poi_to_folder.py --years 2015,2016,2017
+python test/scripts/poi/01_extract_poi_to_folder.py
+python test/scripts/poi/01_extract_poi_to_folder.py --years 2015,2016,2017
 ```
 
 - 解压记录与合并结果见：`poi_extracted\extract_manifest.json`（多次运行会**按年份合并**，不覆盖已成功年份）。
@@ -58,26 +60,30 @@ python test/scripts/poi/extract_poi_to_folder.py --years 2015,2016,2017
 
 #### 工商与区划（`scripts/enterprise/`）
 
+文件名前缀 **01–07** 表示推荐执行顺序；**06–07** 为独立统计工具。
+
 | 脚本 | 说明 |
 |------|------|
-| `extract_enterprises_to_township.py` | 工商 xlsx → 乡镇匹配、按年×乡镇计数 CSV |
-| `run_extract_enterprises_parallel.py` | 按省并行调用上一脚本并合并全国结果 |
-| `balance_township_enterprise_panel.py` | 稀疏企业计数 → 平衡面板 |
-| `merge_division_to_enterprise_counts.py` | 企业计数表并入区县区划字段 |
-| `build_township_county_division_table.py` | 区县+乡镇矢量 → 区划属性表 CSV |
-| `count_enterprise_registrations_total.py` | 全国工商 xlsx 行数统计（快速） |
-| `stats_enterprise_found_year_range.py` | 成立/注册日期年份范围（min/max） |
+| `01_build_township_county_division_table.py` | 区县+乡镇矢量 → 区划属性表 CSV |
+| `02_extract_enterprises_to_township.py` | 工商 xlsx → 乡镇匹配、按年×乡镇计数 CSV |
+| `03_run_extract_enterprises_parallel.py` | 按省并行调用 02 并合并全国结果 |
+| `04_merge_division_to_enterprise_counts.py` | 企业计数表并入区县区划字段 |
+| `05_balance_township_enterprise_panel.py` | 稀疏企业计数 → 平衡面板 |
+| `06_count_enterprise_registrations_total.py` | 全国工商 xlsx 行数统计（快速） |
+| `07_stats_enterprise_found_year_range.py` | 成立/注册日期年份范围（min/max） |
 
 #### POI 与面板（`scripts/poi/`）
 
+文件名前缀 **01–06** 表示推荐流程顺序（解压 → 解析 → 各年宽表 → 并入区县属性）。
+
 | 脚本 | 说明 |
 |------|------|
-| `extract_poi_to_folder.py` | 地级市 POI 压缩包 → `poi_extracted\年份\` |
-| `parse_prefecture_poi.py` | 按年解析 POI → Parquet 等 |
-| `township_poi_panel_wide.py` | 2012–2017 乡镇 POI 宽表（平衡面板） |
-| `township_poi_panel_wide_cat_or_subtype.py` | 同上，CATEGORY 或 SUBTYPE 匹配 |
-| `township_poi_panel_wide_2018_2021_contains_last_segment.py` | 2018–2021 乡镇 POI 宽表（末段匹配版） |
-| `merge_county_attrs_to_township_panel.py` | 县域属性并入乡镇 POI 面板 |
+| `01_extract_poi_to_folder.py` | 地级市 POI 压缩包 → `poi_extracted\年份\` |
+| `02_parse_prefecture_poi.py` | 按年解析 POI → Parquet 等 |
+| `03_township_poi_panel_wide.py` | 2012–2017 乡镇 POI 宽表（平衡面板） |
+| `04_township_poi_panel_wide_cat_or_subtype.py` | 同上，CATEGORY 或 SUBTYPE 匹配 |
+| `05_township_poi_panel_wide_2018_2021_contains_last_segment.py` | 2018–2021 乡镇 POI 宽表（末段匹配版） |
+| `06_merge_county_attrs_to_township_panel.py` | 县域属性并入乡镇 POI 面板 |
 
 ---
 
@@ -164,10 +170,11 @@ python test/scripts/poi/extract_poi_to_folder.py --years 2015,2016,2017
 
 1. 用 **`公共产品供给分类标准.csv`** 核对 POI 小类是否全覆盖、是否与论文附录一致。
 2. POI 与企业数据分别清洗到 **年份—乡镇** 面板，再合并；回归前对两个核心变量按论文取 **对数**。
-3. 脚本已归档至 **`scripts/enterprise/`** 与 **`scripts/poi/`**，输出仍默认写在 **`test/`** 下；记录所用数据版本与字段映射。
+3. 脚本已归档至 **`scripts/enterprise/`** 与 **`scripts/poi/`**，输出仍默认写在 **`test/`** 下；若使用 **1223 分片 CSV**，见 **`anther_data_enterprise/`** 及该目录下 README。记录所用数据版本与字段映射。
 
 ## 变更记录
 
 - 初始化 README，约定论文路径与数据根目录。
 - 纳入 **`核心变量处理方式.txt`** 与 **`公共产品供给分类标准.csv`** 对应的变量定义与处理流程说明。
 - 脚本按主题归档到 **`scripts/enterprise/`**、**`scripts/poi/`**，并补充 **`scripts/README.md`** 索引。
+- 补充 **`anther_data_enterprise/`**（1223 分片 CSV）说明与索引表，与全国工商 xlsx 流水线对照。

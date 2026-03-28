@@ -1,0 +1,27 @@
+# 大型数据与中间结果（脚本可本地再生成）
+test/*.csv
+test/enterprise_parallel_partial/
+# 1223 CSV 流水线中间产物（脚本与 README 仍提交）
+test/anther_data_enterprise/*.csv
+test/anther_data_enterprise/*.json
+test/anther_data_enterprise/enterprise_parallel_partial/
+test/anther_data_enterprise/*.log
+test/anther_data_enterprise/*.err
+test/rep/
+*.log
+*.err
+
+# 编辑器与临时文件
+__pycache__/
+*.py[cod]
+.vscode/
+.idea/
+~$*
+*~
+*.stswp
+
+# 根目录下除 test/ 外勿纳入仓库（避免误 git add -A）
+/*
+!/test/
+!/test/**
+!/.gitignore
